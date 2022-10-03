@@ -1,0 +1,25 @@
+<button mat-button-raised (click)="prevPage()">prev</button>
+<div>paginator {{ currentPage }}/{{ totalPages }}</div>
+<button mat-button-raised (click)="nextPage()">next</button>
+
+<pdf-viewer
+  [src]="pdfSrc"
+  [page]="currentPage"
+  [render-text]="true"
+  [original-size]="true"
+  [fit-to-page]="true"
+  [show-all]="false"
+  style="width: 100%; height: 100vh"
+>
+  <div class="drag-zone">
+    <div
+      class="element"
+      [ngStyle]="item.style"
+      (cdkDragEnded)="savePositionState(item, $event)"
+      cdkDrag
+      *ngFor="let item of currentAnnotations"
+    >
+      <p>{{ item.text }}</p>
+    </div>
+  </div>
+</pdf-viewer>
